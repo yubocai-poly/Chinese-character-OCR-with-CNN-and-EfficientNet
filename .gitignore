@@ -1,0 +1,7 @@
+.vscode/
+checkpoints/
+.idea/
+assets
+dataset/__pycache__
+dataset/test
+dataset/train
