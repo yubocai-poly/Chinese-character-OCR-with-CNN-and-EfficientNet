@@ -1,5 +1,4 @@
 .vscode/
-checkpoints/
 .idea/
 assets
 dataset/__pycache__
