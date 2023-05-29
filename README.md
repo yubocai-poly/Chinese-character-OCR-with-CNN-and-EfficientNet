@@ -73,7 +73,7 @@ python3 convert_to_tfrecord.py HWDB1.1trn_gnt
 We also provide the converted dataset in the following link. You can directly use it for training.
 - [test.tfrecord](https://drive.google.com/file/d/1knT-6pgkTKmvAp-fivCMUtOU9rRG_X-P/view?usp=sharing)
 - [train.tfrecord](https://drive.google.com/file/d/1BhisIm3ebKTLasUx-VNGtIGXYEFJjtlc/view?usp=sharing)
-- 
+
 **Directly download link for all Datasets and training checkpoints can be founded below**
 
 ## Download Link for Datasets and model checkpoints
