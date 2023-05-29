@@ -12,10 +12,15 @@
 - [Introduction](#1-introduction)
 - [Packages Prerequisites](#2-packages-prerequisites)
 - [Data Preparation](#3-dataset-preparation)
+- [Model Construction](#4-model-construction)
+- [Model Training](#5-model-training)
+- [Results of the Models](#6-results-of-the-model)
+- [Download Link for Datasets and Model Checkpoints](#7-download-link-for-datasets-and-model-checkpoints)
+- [References](#8-bibliography)
 
 ## Some Notification
 
-For all the dataset and trainning checkpoints, you can got to [Part 5](#5-download-link-for-datasets-and-model-checkpoints). You need to place the dataset in the `./dataset` folder and the checkpoints in the main folder of this project.
+For all the dataset and trainning checkpoints, you can got to [Part 7](#7-download-link-for-datasets-and-model-checkpoints). You need to place the dataset in the `./dataset` folder and the checkpoints in the main folder of this project.
 
 If you are using **Mac OS** and have problem label the Chinese characters with `Matplotlib`, this [document](MacLabel_Problem.md) may help you.
 
@@ -107,7 +112,55 @@ def effcientnetB0_model():
 
 ## 6. Results of the model
 
+### 6.1 Simple CNN Model
 
+In fact we were surprised that this simple CNN model had some recognition rate, considering the complex structure of Chinese characters and the large number of writing styles in our dataset. The accuracy of the simple CNN model is around 40% for the `testing dataset` and 97% for `training dataset` after about 60 epoches which is not bad for a simple model.
+
+<div align=center>
+  <figure style="display: inline-block; margin: 0 20px;">
+    <img src="Graphs/output_cnn_accuracy.png" width="480">
+  </figure>
+  <figure style="display: inline-block; margin: 0 20px;">
+    <img src="Graphs/output_cnn_loss.png" width="480">
+  </figure>
+</div>
+
+We test some random images from the testing dataset and the results are as follows:
+
+<div align=center>
+  <figure style="display: inline-block; margin: 0 20px;">
+    <img src="Graphs/output_simple_cnn.png" width="700">
+  </figure>
+</div>
+
+We can see that there are 4 correct prediction among the 9 images. However, we are not satisfied with the results. Therefore, we try to use a more complex CNN model to improve the accuracy.
+
+### 6.2 Complex CNN Model
+
+Interestingly, after our training and testing, we found that this complex model did not converge and the accuracy was still very low after almost 200 epoches of training. Our analysis suggests the following reasons:
+
+### 6.3 Pre-trained EfficientNetB0 Model
+
+We use the pre-trained EfficientNetB0 model to train our dataset. The accuracy of the EfficientNetB0 model is around 87% for the `testing dataset` and 96% for `training dataset` after about 60 epoches which in a huge improvement compared to the simple CNN model.
+
+<div align=center>
+  <figure style="display: inline-block; margin: 0 20px;">
+    <img src="Graphs/output_eff_accuracy.png" width="480">
+  </figure>
+  <figure style="display: inline-block; margin: 0 20px;">
+    <img src="Graphs/output_eff_loss.png" width="480">
+  </figure>
+</div>
+
+We test some random images from the testing dataset and the results are as follows:
+
+<div align=center>
+  <figure style="display: inline-block; margin: 0 20px;">
+    <img src="Graphs/output_EfficientNet.png" width="700">
+  </figure>
+</div>
+
+We can see that there are 7 correct prediction among the 9 images. We think this is a very good result, considering that we are analysing images of such a complex structure that many words are difficult to distinguish with our observations.
 
 ## 7. Download Link for Datasets and model checkpoints
 
@@ -121,4 +174,4 @@ The link below can be used to download processed data and trained model checkpoi
 1. Unzip the files after downloading. 
 2. Merge the folder in the zip file into the project root directly.
 
-## Bibliography
+## 8. Bibliography
