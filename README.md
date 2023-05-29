@@ -62,7 +62,7 @@ chmod u+x get_hwdb_1.0_1.1.sh
 get_hwdb_1.0_1.1.sh
 ```
 
-After downloading the dataset and unzip it, you can find a **train** folder and a **test** folder. However, the format of the dataset is *gnt* with 32 characters and labels which is not convenient for us for trainning. Therefore, we provide a script to convert the dataset to *png* format with labels. We can run the following command to convert the dataset into tfrecord format:
+After downloading the dataset and unzip it, you can find a **train** folder and a **test** folder. However, the format of the dataset is `gnt` with 32 characters and labels which is not convenient for us for trainning. Therefore, we provide a script to convert the dataset to `png` format with labels. We can run the following command to convert the dataset into `tfrecord` format:
 
 ```bash
 cd local_address_to_this_project/dataset
