@@ -28,14 +28,24 @@ The main reasons why Chinese handwritten OCR is more difficult than MNIST are th
 <div align=center>
   <figure style="display: inline-block; margin: 0 20px;">
     <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Cur_eg.svg" width="180">
-    <figcaption>Cursive (草书)</figcaption>
+    <figcaption>(草书)</figcaption>
   </figure>
   <figure style="display: inline-block; margin: 0 20px;">
     <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Semi-Cur_Eg.svg" width="180">
-    <figcaption>Semi-Cursive (行书)</figcaption>
+    <figcaption>(行书)</figcaption>
   </figure>
   <figure style="display: inline-block; margin: 0 20px;">
     <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Kaishu.png" width="180">
-    <figcaption>Regular (楷书)</figcaption>
+    <figcaption>(楷书)</figcaption>
   </figure>
 </div>
+
+## 2. Packages Prerequisites
+
+Here we provide the requirements.txt file for the packages prerequisites. You can install all the packages by running the following command:
+
+```bash
+pip install -r requirements.txt
+```
+
+**Note:** If you are using
