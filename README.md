@@ -48,4 +48,28 @@ Here we provide the requirements.txt file for the packages prerequisites. You ca
 pip install -r requirements.txt
 ```
 
-**Note:** If you are using
+**Note:** If you are using **Apple Silicon M1/M2**, the installation of `tensorflow` may fail. You can find the solution in [this webpage](https://caffeinedev.medium.com/how-to-install-tensorflow-on-m1-mac-8e9b91d93706).
+
+## 3. Dataset Preparation
+
+Here we use the data from [CASIA's open source Chinese handwriting dataset](http://www.nlpr.ia.ac.cn/databases/handwriting/GTLC.html). In our project, we only use the **Offline CASIA-HWDB 1.0-1.2 Database**. All data in the version 1.0-1.2 are single-word and 2.0-2.2 is sentence-level which require **CRNN**. This dataset contains 7185 Chinese characters and 171 English letters, numbers, punctuation, etc. More detailed information in this [link](http://www.nlpr.ia.ac.cn/databases/handwriting/Offline_database.html).
+
+You can operate the following command to download the dataset:
+
+```bash
+cd local_address_to_this_project/dataset
+chmod u+x get_hwdb_1.0_1.1.sh
+get_hwdb_1.0_1.1.sh
+```
+
+After downloading the dataset and unzip it, you can find a **train** folder and a **test** folder. However, the format of the dataset is *gnt* with 32 characters and labels which is not convenient for us for trainning. Therefore, we provide a script to convert the dataset to *png* format with labels. We can run the following command to convert the dataset into tfrecord format:
+
+```bash
+cd local_address_to_this_project/dataset
+python3 convert_to_tfrecord.py HWDB1.1tst_gnt
+python3 convert_to_tfrecord.py HWDB1.1trn_gnt
+```
+
+We also provide the converted dataset in the following link. You can directly use it for training.
+- [test.tfrecord](https://drive.google.com/file/d/1knT-6pgkTKmvAp-fivCMUtOU9rRG_X-P/view?usp=sharing)
+- [train.tfrecord](https://drive.google.com/file/d/1BhisIm3ebKTLasUx-VNGtIGXYEFJjtlc/view?usp=sharing)
