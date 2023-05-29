@@ -73,3 +73,12 @@ python3 convert_to_tfrecord.py HWDB1.1trn_gnt
 We also provide the converted dataset in the following link. You can directly use it for training.
 - [test.tfrecord](https://drive.google.com/file/d/1knT-6pgkTKmvAp-fivCMUtOU9rRG_X-P/view?usp=sharing)
 - [train.tfrecord](https://drive.google.com/file/d/1BhisIm3ebKTLasUx-VNGtIGXYEFJjtlc/view?usp=sharing)
+**Directly download all Datasets and training checkpoints**
+
+## Download Link for Datasets and model checkpoints
+The link below can be used to download processed data and trained model checkpoints file. The datasets have been already converted to `tfrecord`. The checkpoints provided have a validation accuracy around 40% for simple CNN model and 87% for EfficientNetB0 model.
+- [Dataset & Checkpoints](https://frrl.xyz/dataset)
+- [Checkpoints only](https://frrl.xyz/ckpt)
+### Usage
+1. Unzip the files after downloading. 
+2. Directly merge the folder in the zip file into the project root directly.
