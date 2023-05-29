@@ -7,6 +7,18 @@
 - [Junyuan Wang](https://github.com/frank2002)
 - [Yubo Cai](https://github.com/yubocai-poly)
 
+## Table of Contents
+
+- [Introduction](#1-introduction)
+- [Packages Prerequisites](#2-packages-prerequisites)
+- [Data Preparation](#3-dataset-preparation)
+
+## Some Notification
+
+For all the dataset and trainning checkpoints, you can got to [Part 5](#5-download-link-for-datasets-and-model-checkpoints). You need to place the dataset in the `./dataset` folder and the checkpoints in the main folder of this project.
+
+If you are using **Mac OS** and have problem label the Chinese characters with `Matplotlib`, this [document](MacLabel_Problem.md) may help you.
+
 ## 1. Introduction
 
 When we learn CNNs in machine learning, we used the MNIST dataset for image recognition. This data set contains 26 letters of the alphabet as well as numbers. Therefore we would like to try OCR recognition for Chinese handwritten characters. However, the difficulty of this is very high compared to MNIST.
@@ -74,12 +86,39 @@ We also provide the converted dataset in the following link. You can directly us
 - [test.tfrecord](https://drive.google.com/file/d/1knT-6pgkTKmvAp-fivCMUtOU9rRG_X-P/view?usp=sharing)
 - [train.tfrecord](https://drive.google.com/file/d/1BhisIm3ebKTLasUx-VNGtIGXYEFJjtlc/view?usp=sharing)
 
-**Directly download link for all Datasets and training checkpoints can be founded below**
+## 4. Model Construction
 
-## Download Link for Datasets and model checkpoints
+We use Three models for this project. The first one is a **simple CNN** model, second one is a more **complex CNN** model, and the third one is a **pre-trained EfficientNetB0** model. 
+
+Here we just simply use the `tf.keras` API to build the model to build the CNN model. For the **simple CNN** model, we just add 2 convolutional layer and 2 maxpooling layer. For the **pre-trained EfficientNetB0** model, we use the API from tensorflow as follows:
+
+```python
+def effcientnetB0_model():
+    inputs = layers.Input(shape=(IMG_SIZE, IMG_SIZE, 3))  # EfficientNetB0 expects 3 channels
+    base_model = EfficientNetB0(include_top=False, input_tensor=inputs, weights='imagenet')
+    x = base_model.output
+    x = layers.GlobalAveragePooling2D()(x)
+    x = layers.Dense(num_classes, activation='softmax')(x)
+    model = keras.Model(inputs=inputs, outputs=x)
+    return model
+```
+
+## 5. Model Training
+
+## 6. Results of the model
+
+
+
+## 7. Download Link for Datasets and model checkpoints
+
+>  **Directly download link for all Datasets and training checkpoints can be founded below**
+
 The link below can be used to download processed data and trained model checkpoints file. The datasets have been already converted to `tfrecord`. The checkpoints provided have a validation accuracy around 40% for simple CNN model and 87% for EfficientNetB0 model.
 - [Dataset & Checkpoints](https://frrl.xyz/dataset)
 - [Checkpoints only](https://frrl.xyz/ckpt)
+
 ### Usage
 1. Unzip the files after downloading. 
 2. Merge the folder in the zip file into the project root directly.
+
+## Bibliography
