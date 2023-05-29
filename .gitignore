@@ -5,3 +5,4 @@ dataset/__pycache__
 dataset/test
 dataset/train
 checkpoints
+*.tfrecord
