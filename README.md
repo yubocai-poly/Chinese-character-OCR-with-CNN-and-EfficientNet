@@ -82,4 +82,4 @@ The link below can be used to download processed data and trained model checkpoi
 - [Checkpoints only](https://frrl.xyz/ckpt)
 ### Usage
 1. Unzip the files after downloading. 
-2. Directly merge the folder in the zip file into the project root directly.
+2. Merge the folder in the zip file into the project root directly.
