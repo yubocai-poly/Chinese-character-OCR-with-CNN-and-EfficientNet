@@ -87,6 +87,11 @@ python3 convert_to_tfrecord.py HWDB1.1tst_gnt
 python3 convert_to_tfrecord.py HWDB1.1trn_gnt
 ```
 
+### Dataset definition
+
+Here we store the image, the width and height of the image, and the label of the image in the `tfrecord` file. For the label part, to avoid the problem of encoding and decoding chinese characters, we use the number to label different characters and provide a `dictionary` to map the number to the corresponding character. The dictionary is provided at `dataset/characters.txt`.
+
+
 After the conversion, the dataset will be defined as following:
 ```python
 tf.train.Example(features=tf.train.Features(
@@ -98,35 +103,6 @@ tf.train.Example(features=tf.train.Features(
       }))
 ```
 
-In the future, if you want to parse the dataset, you can use the following code:
-
-```python
-def parse_image(record):
-    """
-    :param record: tfrecord file
-    :return: image and label
-    """
-    features = tf.io.parse_single_example(record,
-                                          features={
-                                              'width':
-                                                  tf.io.FixedLenFeature([], tf.int64),
-                                              'height':
-                                                  tf.io.FixedLenFeature([], tf.int64),
-                                              'label':
-                                                  tf.io.FixedLenFeature([], tf.int64),
-                                              'image':
-                                                  tf.io.FixedLenFeature([], tf.string),
-                                          })
-    img = tf.io.decode_raw(features['image'], out_type=tf.uint8)
-    w = features['width']
-    h = features['height']
-    img = tf.cast(tf.reshape(img, (w, h)), dtype=tf.float32)
-    label = tf.cast(features['label'], tf.int64)
-    return {'image': img, 'label': label}
-
-dataset = tf.data.TFRecordDataset([filename])
-dataset = dataset.map(parse_image)
-```
 
 We also provide the converted dataset in the following link. You can directly use it for training.
 - [test.tfrecord](https://drive.google.com/file/d/1knT-6pgkTKmvAp-fivCMUtOU9rRG_X-P/view?usp=sharing)
