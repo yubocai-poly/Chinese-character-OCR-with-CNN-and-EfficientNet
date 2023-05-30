@@ -110,6 +110,50 @@ def effcientnetB0_model():
 
 ## 5. Model Training
 
+Since the dataset is quite large, we use the tensorflow dataset format to load the data. Since the model might converge very slow, we use the checkpoint saving and logging callback functions to tracking the training of model. 
+
+We save the model with the lowest validation loss automatically through training to prevent the model from over-fitting and data-loss.
+  
+  ```python
+  tf.keras.callbacks.ModelCheckpoint(ckpt_path,
+                                            save_weights_only=True,
+                                            verbose=1,
+                                            save_freq='epoch',
+                                            save_best_only=True),
+```
+The checkpoints are saved in the `checkpoints` folder. You can find pretrained checkpoints at the end of this document.
+
+The training progress and statistics are saved in the `history.pickle` file. You can find the plotted training history in the `Graphs` folder.
+
+### Time comparing
+
+The complexity of two models are quite different. The simple CNN model is quite simple and the training time is quite short. However, the pre-trained EfficientNetB0 model is quite complex and the training time is quite long. Here we provide the training time for the two models.
+
+#### Simple CNN model:
+```
+Epoch 18/100
+1021/1024 [============================>.] - ETA: 0s - loss: 0.5518 - accuracy: 0.8602
+Epoch 18: val_loss did not improve from 3.84623
+1024/1024 [==============================] - 15s 14ms/step - loss: 0.5533 - accuracy: 0.8600 - val_loss: 4.1783 - val_accuracy: 0.4251
+Epoch 19/100
+1021/1024 [============================>.] - ETA: 0s - loss: 0.5509 - accuracy: 0.8620
+Epoch 19: val_loss did not improve from 3.84623
+1024/1024 [==============================] - 15s 15ms/step - loss: 0.5501 - accuracy: 0.8621 - val_loss: 4.2877 - val_accuracy: 0.3924
+```
+
+#### Pre-trained EfficientNetB0 model:
+```
+Epoch 1/100
+1024/1024 [==============================] - ETA: 0s - loss: 0.0365 - accuracy: 0.9904
+Epoch 1: val_loss improved from inf to 0.52021, saving model to ./checkpoints/efficient_net\cn_ocr-1.ckpt
+1024/1024 [==============================] - 158s 147ms/step - loss: 0.0365 - accuracy: 0.9904 - val_loss: 0.5202 - val_accuracy: 0.8870
+Epoch 2/100
+1024/1024 [==============================] - ETA: 0s - loss: 0.1560 - accuracy: 0.9588
+Epoch 2: val_loss did not improve from 0.52021
+1024/1024 [==============================] - 149s 146ms/step - loss: 0.1560 - accuracy: 0.9588 - val_loss: 0.6349 - val_accuracy: 0.8544
+```
+
+
 ## 6. Results of the model
 
 ### 6.1 Simple CNN Model
@@ -137,7 +181,11 @@ We can see that there are 4 correct prediction among the 9 images. However, we a
 
 ### 6.2 Complex CNN Model
 
-Interestingly, after our training and testing, we found that this complex model did not converge and the accuracy was still very low after almost 200 epoches of training. Our analysis suggests the following reasons:
+Interestingly, after our training and testing, we found that this complex model did not converge and the accuracy was still very low after almost 200 epoches of training. It is probably due to the reason below:
+
+Optimization Difficulty: Deeper networks are harder to train. Gradients can vanish or explode as they are backpropagated through many layers, making learning difficult. Although batch normalization and careful initialization can help, they may not completely solve the problem.
+
+Another possible reason is that the complex model is not suitable for the dataset. The model cannot capture the features of the dataset and the model cannot converge.
 
 ### 6.3 Pre-trained EfficientNetB0 Model
 
