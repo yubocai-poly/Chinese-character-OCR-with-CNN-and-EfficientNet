@@ -87,6 +87,47 @@ python3 convert_to_tfrecord.py HWDB1.1tst_gnt
 python3 convert_to_tfrecord.py HWDB1.1trn_gnt
 ```
 
+After the conversion, the dataset will be defined as following:
+```python
+tf.train.Example(features=tf.train.Features(
+      feature={
+            "label": tf.train.Feature(int64_list=tf.train.Int64List(value=[index])),
+            'image': tf.train.Feature(bytes_list=tf.train.BytesList(value=[img.tobytes()])),
+            'width': tf.train.Feature(int64_list=tf.train.Int64List(value=[w])),
+            'height': tf.train.Feature(int64_list=tf.train.Int64List(value=[h])),
+      }))
+```
+
+In the future, if you want to parse the dataset, you can use the following code:
+
+```python
+def parse_image(record):
+    """
+    :param record: tfrecord file
+    :return: image and label
+    """
+    features = tf.io.parse_single_example(record,
+                                          features={
+                                              'width':
+                                                  tf.io.FixedLenFeature([], tf.int64),
+                                              'height':
+                                                  tf.io.FixedLenFeature([], tf.int64),
+                                              'label':
+                                                  tf.io.FixedLenFeature([], tf.int64),
+                                              'image':
+                                                  tf.io.FixedLenFeature([], tf.string),
+                                          })
+    img = tf.io.decode_raw(features['image'], out_type=tf.uint8)
+    w = features['width']
+    h = features['height']
+    img = tf.cast(tf.reshape(img, (w, h)), dtype=tf.float32)
+    label = tf.cast(features['label'], tf.int64)
+    return {'image': img, 'label': label}
+
+dataset = tf.data.TFRecordDataset([filename])
+dataset = dataset.map(parse_image)
+```
+
 We also provide the converted dataset in the following link. You can directly use it for training.
 - [test.tfrecord](https://drive.google.com/file/d/1knT-6pgkTKmvAp-fivCMUtOU9rRG_X-P/view?usp=sharing)
 - [train.tfrecord](https://drive.google.com/file/d/1BhisIm3ebKTLasUx-VNGtIGXYEFJjtlc/view?usp=sharing)
