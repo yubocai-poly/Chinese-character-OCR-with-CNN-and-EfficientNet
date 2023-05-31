@@ -240,3 +240,12 @@ The link below can be used to download processed data and trained model checkpoi
 2. Merge the folder in the zip file into the project root directly.
 
 ## 8. Bibliography
+
+[1] Ralf C Staudemeyer and Eric Rothstein Morris. “Understanding LSTM–a tutorial into long short-term memory recurrent neural networks”. In: arXiv preprint arXiv:1909.09586 (2019).
+
+[2] Mingxing Tan and Quoc V. Le. EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks. 2020. arXiv: 1905.11946 [cs.LG].
+
+[3] Alex Graves et al. “Connectionist temporal classification: labelling unsegmented sequence data with recurrent neural networks”. In: Proceedings of the 23rd international conference on Machine learning. 2006, pp. 369–376.
+
+[4] Yong Yu et al. “A review of recurrent neural networks: LSTM cells and network architectures”. In: Neural computation 31.7 (2019), pp. 1235–1270.
+
