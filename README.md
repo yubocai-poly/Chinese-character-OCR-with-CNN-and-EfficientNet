@@ -1,6 +1,6 @@
 # OCR for Chinese Characters with CNN and EfficientNet
 
-> This is the final project of CSE204 Machine Learning course in Ecole Polytechnique. We use CNN and EfficientNet model to do OCR for singular handwriting Chinese Characters. The project is mainly based on Tensorflow 2.0 API.
+> This is the final project of CSE204 Machine Learning course in Ecole Polytechnique. We use CNN and EfficientNet model to do OCR for singular handwriting Chinese Characters. The project is mainly based on Tensorflow 2.0 API. Here we have a static online version for the project, please visit in this [link](https://yubocai-poly.github.io/ocr_static.html)
 
 ## Contributors
 
